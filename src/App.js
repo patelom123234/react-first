@@ -1,4 +1,5 @@
 import "./App.css";
+import React from "react";
 
 const pizzaData = [
   {
@@ -48,10 +49,50 @@ const pizzaData = [
 function App() {
   return (
     <div>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Header />
+      <Menu />
+      <Footer />
     </div>
+  );
+}
+
+function Header() {
+  return <h1>Fast React Pizz Co.</h1>;
+}
+
+function Menu() {
+  return (
+    <>
+      <h1>
+        Our Menu <span>🍕</span>
+      </h1>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </>
+  );
+}
+
+function Footer() {
+  let hour = new Date().getHours();
+  let minute = new Date().getMinutes();
+  let period = "AM";
+  let formatHour = hour;
+  if (hour > 12) {
+    formatHour = hour - 12;
+    period = "PM";
+  } else if (hour === 0) {
+    formatHour = 12;
+  }
+  const isOpen = hour > 12 && hour < 24;
+  if (!isOpen) {
+    return <footer>Sorry, we're currently closed</footer>;
+  }
+  return (
+    <footer>
+      {formatHour + ":" + minute + " " + period}, we're currently open
+    </footer>
   );
 }
 
